@@ -63,13 +63,16 @@ public class SimpleFileServer {
 						break;
 					}
 					byte [] mybytearray  = new byte [(int)fileSending.length()];
+					byte [] encbytearray  = new byte [(int)fileSending.length()];
 					fis = new FileInputStream(fileSending);
 					bis = new BufferedInputStream(fis);
 					bis.read(mybytearray,0,mybytearray.length);
 					os = sock.getOutputStream();
+					//Encrypt bytes to be sent
+					encbytearray = encryptByteArray(mybytearray);
 					//Print info on file being sent
-					System.out.println("Sending " + fileSending.getName() + "(" + mybytearray.length + " bytes)");
-					os.write(mybytearray,0,mybytearray.length);
+					System.out.println("Sending " + fileSending.getName() + "(" + encbytearray.length + " bytes)");
+					os.write(encbytearray,0,encbytearray.length);
 					os.flush();
 					System.out.println("File transfer complete");
 					//reset selection
@@ -85,5 +88,23 @@ public class SimpleFileServer {
 		finally {
 			if (servsock != null) servsock.close();
 		}
+	}
+	
+	public static byte[] encryptByteArray(byte[] in){
+		byte[] encryptedArray = in;
+		StringBuffer key = new StringBuffer("KazuyaDanielBrayden");
+		int sharedKey = 0;
+		//Calculate shared key
+		for(int i = 0; i < key.length(); i++){
+			sharedKey += (int)key.charAt(i);
+			System.out.println("LOG: sharedkey = " + sharedKey);
+		}
+		//Encrypt bits
+		for(int j = 0; j < in.length; j++){
+			//System.out.println("LOG: original byte = " + in[j]);
+			encryptedArray[j] = (byte) ((int) in[j] + sharedKey);
+			//System.out.println("LOG: new byte = " + encryptedArray[j]);
+		}
+		return encryptedArray;
 	}
 }

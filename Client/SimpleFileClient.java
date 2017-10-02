@@ -71,6 +71,7 @@ public class SimpleFileClient {
 			     
 			    //Receive file from server
 			    byte [] mybytearray  = new byte [FILE_SIZE];
+			    byte [] decryptedArray  = new byte [FILE_SIZE];
 			    InputStream is = sock.getInputStream();
 			    fos = new FileOutputStream(FILE_TO_RECEIVED);
 			    bos = new BufferedOutputStream(fos);
@@ -82,8 +83,11 @@ public class SimpleFileClient {
 			    	bytesRead = is.read(mybytearray, current, (mybytearray.length-current));
 			    	if(bytesRead >= 0) current += bytesRead;
 			    } while(bytesRead > -1);
+			    
+			    //Decrypt file
+			    decryptedArray = decryptByteArray(mybytearray);
 	
-			    bos.write(mybytearray, 0 , current);
+			    bos.write(decryptedArray, 0 , current);
 			    bos.flush();
 			    System.out.println("File: " + FILE_TO_RECEIVED + " downloaded sucessfully. (" + current + " bytes read)");
 			}
@@ -103,6 +107,25 @@ public class SimpleFileClient {
 		System.out.println("3) CSV File");
 		System.out.println("4) PDF File");
 		System.out.println("5) Video File");
+	}
+	
+	//Decrypt message from server
+	public static byte[] decryptByteArray(byte[] in){
+		byte[] decryptedArray = in;
+		StringBuffer key = new StringBuffer("KazuyaDanielBrayden");
+		int sharedKey = 0;
+		//Calculate shared key
+		for(int i = 0; i < key.length(); i++){
+			sharedKey += (int)key.charAt(i);
+			System.out.println("LOG: sharedkey = " + sharedKey);
+		}
+		//Encrypt bits
+		for(int j = 0; j < in.length; j++){
+			//System.out.println("LOG: original byte = " + in[j]);
+			decryptedArray[j] = (byte) ((int) in[j] - sharedKey);
+			//System.out.println("LOG: new byte = " + encryptedArray[j]);
+		}
+		return decryptedArray;
 	}
 
 }
