@@ -29,33 +29,37 @@ public class SimpleFileServer {
     
 		try {
 			servsock = new ServerSocket(SOCKET_PORT);
+			System.out.println("Server Started...");
 			while (true) {
-				System.out.println("Waiting...");
 				try {
 					sock = servsock.accept();
-					System.out.println("Accepted connection : " + sock);
+					System.out.println("Accepted connection to client : " + sock);
 					while(fileRequested == 0){
 						//Input stream
 						InputStream is = sock.getInputStream();
-						System.out.println("Input stream open");
+						//System.out.println("LOG: Input stream open");
 						//Data input stream
 						DataInputStream dis = new DataInputStream(is);
-						System.out.println("Data stream open");
+						//System.out.println("LOG: Data stream open");
 						System.out.println("Waiting for selection....");
 						fileRequested = dis.readInt();
-						System.out.println("File Requested : " + fileRequested);
 					}
 					//send file
 					switch(fileRequested){
 						case 1: fileSending = new File(IMG_FILE);
+						System.out.println("File Requested : leroy.jpg");
 						break;
 						case 2: fileSending = new File(MP3_FILE);
+						System.out.println("File Requested : RickRoll.mp3");
 						break;
 						case 3: fileSending = new File(CSV_FILE);
+						System.out.println("File Requested : SampleCSV.csv");
 						break;
 						case 4: fileSending = new File(PDF_FILE);
+						System.out.println("File Requested : SamplePDF.pdf");
 						break;
 						case 5: fileSending = new File(MP4_FILE);
+						System.out.println("File Requested : SampleVid.mp4");
 						break;
 					}
 					byte [] mybytearray  = new byte [(int)fileSending.length()];
@@ -67,7 +71,7 @@ public class SimpleFileServer {
 					System.out.println("Sending " + fileSending.getName() + "(" + mybytearray.length + " bytes)");
 					os.write(mybytearray,0,mybytearray.length);
 					os.flush();
-					System.out.println("Done.");
+					System.out.println("File transfer complete");
 					//reset selection
 					fileRequested = 0;
 				}
