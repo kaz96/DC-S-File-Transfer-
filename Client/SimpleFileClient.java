@@ -114,10 +114,12 @@ public class SimpleFileClient {
 		byte[] decryptedArray = in;
 		StringBuffer key = new StringBuffer("KazuyaDanielBrayden");
 		int sharedKey = 0;
+		//Print status to console
+		System.out.println("Decrypting file...");
 		//Calculate shared key
 		for(int i = 0; i < key.length(); i++){
 			sharedKey += (int)key.charAt(i);
-			System.out.println("LOG: sharedkey = " + sharedKey);
+			//System.out.println("LOG: sharedkey = " + sharedKey);
 		}
 		//Encrypt bits
 		for(int j = 0; j < in.length; j++){
@@ -125,6 +127,8 @@ public class SimpleFileClient {
 			decryptedArray[j] = (byte) ((int) in[j] - sharedKey);
 			//System.out.println("LOG: new byte = " + encryptedArray[j]);
 		}
+		//Print status to console
+		System.out.println("File Decrypted");
 		return decryptedArray;
 	}
 
