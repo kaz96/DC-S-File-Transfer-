@@ -28,8 +28,9 @@ public class SimpleFileClient {
 		try {
 			while(true){
 				//Connect to server
+				System.out.println("Connecting to server...");
 				sock = new Socket(SERVER, SOCKET_PORT);
-				System.out.println("Connecting...");
+				System.out.println("Established connection successfully");
 				//Send message to server choosing which file to send
 				int selectFile = 0;
 				OutputStream outStream = sock.getOutputStream();
@@ -62,11 +63,11 @@ public class SimpleFileClient {
 				}catch (Exception e){
 					System.out.println("ERROR: Incorrect input");
 				}
-				System.out.println("LOG: FILE SELECTED: " + selectFile);
+				System.out.println("Requesting file...");
 			    //Create directory for files
 			    boolean successful =  (new File("Server Downloaded Files")).mkdir();
-			    if (successful){	System.out.println("directory was created successfully");	}	//Directory created successfully
-			    else{	System.out.println("failed trying to create the directory");	}	//Directory failed to create
+			    if (successful){	System.out.println("Directory was created successfully");	}	//Directory created successfully
+			    else{	System.out.println("Failed trying to create the directory");	}	//Directory failed to create
 			     
 			    //Receive file from server
 			    byte [] mybytearray  = new byte [FILE_SIZE];
@@ -74,7 +75,7 @@ public class SimpleFileClient {
 			    fos = new FileOutputStream(FILE_TO_RECEIVED);
 			    bos = new BufferedOutputStream(fos);
 			    bytesRead = is.read(mybytearray,0,mybytearray.length);
-			    System.out.println("Bytes Read: " + bytesRead);
+			    //System.out.println("Bytes Read: " + bytesRead);
 			    current = bytesRead;
 	
 			    do {
@@ -84,7 +85,7 @@ public class SimpleFileClient {
 	
 			    bos.write(mybytearray, 0 , current);
 			    bos.flush();
-			    System.out.println("File " + FILE_TO_RECEIVED + " downloaded (" + current + " bytes read)");
+			    System.out.println("File: " + FILE_TO_RECEIVED + " downloaded sucessfully. (" + current + " bytes read)");
 			}
 		}
 		finally {
@@ -95,7 +96,7 @@ public class SimpleFileClient {
 	}
   
 	//Print menu to console
-	public void printMenu(){
+	public static void printMenu(){
 		System.out.println("Select a file to download from server: ");
 		System.out.println("1) Image File");
 		System.out.println("2) Music File");
