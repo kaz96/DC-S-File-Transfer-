@@ -11,11 +11,11 @@ import java.net.Socket;
 public class SimpleFileServer {
 
 	public final static int SOCKET_PORT = 13267;  // you may change this
-	public final static String IMG_FILE = "C:/Users/BJ/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/leroy.jpg";  //Image file to send
-	public final static String MP3_FILE = "C:/Users/BJ/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/RickRoll.mp3";  //MP3 file to send
-	public final static String CSV_FILE = "C:/Users/BJ/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SampleCSV.csv";  //CSV file to send
-	public final static String PDF_FILE = "C:/Users/BJ/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SamplePDF.pdf";  //PDF file to send
-	public final static String MP4_FILE = "C:/Users/BJ/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SampleVid.mp4";  //MP4 file to send
+	public final static String IMG_FILE = "C:/Users/brayd/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/leroy.jpg";  //Image file to send
+	public final static String MP3_FILE = "C:/Users/brayd/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/RickRoll.mp3";  //MP3 file to send
+	public final static String CSV_FILE = "C:/Users/brayd/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SampleCSV.csv";  //CSV file to send
+	public final static String PDF_FILE = "C:/Users/brayd/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SamplePDF.pdf";  //PDF file to send
+	public final static String MP4_FILE = "C:/Users/brayd/Google Drive/Semester 2 2017/Data Communications and Security/Assignment 2/TCP_File_Server/files/SampleVid.mp4";  //MP4 file to send
   
 
 	public static void main (String[] args) throws IOException {
